@@ -92,6 +92,12 @@ namespace ds {
         
         ~Fluido();
         
+        gl::TextureRef getVelocityTexture(){ return mVelocityBuffer->getTexture(); }
+        gl::TextureRef getDensityTexture(){ return mDensityBuffr->getTexture(); }
+        
+        float getDeltaT(){ return mDeltaT; }
+        float getDissapation(){ return mDissipation; }
+        
     private:
         
         void initBuffers();

@@ -16,6 +16,10 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
+		4F567A4F1C975940009AD003 /* FluidParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F567A4C1C975940009AD003 /* FluidParticle.cpp */; };
+		4F567A531C97594C009AD003 /* particleRender.frag in Resources */ = {isa = PBXBuildFile; fileRef = 4F567A501C97594C009AD003 /* particleRender.frag */; };
+		4F567A541C97594C009AD003 /* particleRender.vert in Resources */ = {isa = PBXBuildFile; fileRef = 4F567A511C97594C009AD003 /* particleRender.vert */; };
+		4F567A551C97594C009AD003 /* particleUpdate.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 4F567A521C97594C009AD003 /* particleUpdate.glsl */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5708B1D7E1F5446483E97B5B /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0310DBEFCDB04F129AAA314B /* CinderApp.icns */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -49,6 +53,12 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		4F567A4C1C975940009AD003 /* FluidParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FluidParticle.cpp; path = ../src/FluidParticle.cpp; sourceTree = "<group>"; };
+		4F567A4D1C975940009AD003 /* FluidParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FluidParticle.h; path = ../src/FluidParticle.h; sourceTree = "<group>"; };
+		4F567A4E1C975940009AD003 /* UpdateBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateBatch.h; path = ../src/UpdateBatch.h; sourceTree = "<group>"; };
+		4F567A501C97594C009AD003 /* particleRender.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = particleRender.frag; sourceTree = "<group>"; };
+		4F567A511C97594C009AD003 /* particleRender.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = particleRender.vert; sourceTree = "<group>"; };
+		4F567A521C97594C009AD003 /* particleUpdate.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = particleUpdate.glsl; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* Fluido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fluido.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1A68A01C2239990059E7D3 /* gpGpuFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gpGpuFrameBuffer.cpp; sourceTree = "<group>"; };
@@ -105,6 +115,9 @@
 				BF75280B1C27FB3500BB40B5 /* Fluido */,
 				BF1A689F1C2239990059E7D3 /* gpgpuFrameBuffer */,
 				05911502F083474FA2B5F481 /* FluidoApp.cpp */,
+				4F567A4C1C975940009AD003 /* FluidParticle.cpp */,
+				4F567A4D1C975940009AD003 /* FluidParticle.h */,
+				4F567A4E1C975940009AD003 /* UpdateBatch.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -198,6 +211,9 @@
 		BF1A68A31C2239E10059E7D3 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				4F567A501C97594C009AD003 /* particleRender.frag */,
+				4F567A511C97594C009AD003 /* particleRender.vert */,
+				4F567A521C97594C009AD003 /* particleUpdate.glsl */,
 				BFD0DFBB1C2CE12E000337AE /* black.png */,
 				BFD0DFBC1C2CE12E000337AE /* f1.png */,
 				BFD0DFBD1C2CE12E000337AE /* Fluido */,
@@ -278,6 +294,7 @@
 			files = (
 				BFD0DFC61C2CE12E000337AE /* f1.png in Resources */,
 				BFD0DFCD1C2CE12E000337AE /* tround.jpg in Resources */,
+				4F567A551C97594C009AD003 /* particleUpdate.glsl in Resources */,
 				BFD0DFC71C2CE12E000337AE /* Fluido in Resources */,
 				BFD0DFCA1C2CE12E000337AE /* tex1.png in Resources */,
 				BFD0DFC91C2CE12E000337AE /* tex0.png in Resources */,
@@ -285,6 +302,8 @@
 				BFD0DFCB1C2CE12E000337AE /* triangle.png in Resources */,
 				5708B1D7E1F5446483E97B5B /* CinderApp.icns in Resources */,
 				BFD0DFC51C2CE12E000337AE /* black.png in Resources */,
+				4F567A531C97594C009AD003 /* particleRender.frag in Resources */,
+				4F567A541C97594C009AD003 /* particleRender.vert in Resources */,
 				BFD0DFCC1C2CE12E000337AE /* triangle.tif in Resources */,
 				BFD0DFCE1C2CE12E000337AE /* tround.png in Resources */,
 			);
@@ -299,6 +318,7 @@
 			files = (
 				E522DB6331C142CBB07D0A0E /* FluidoApp.cpp in Sources */,
 				BF1A68A21C2239990059E7D3 /* gpGpuFrameBuffer.cpp in Sources */,
+				4F567A4F1C975940009AD003 /* FluidParticle.cpp in Sources */,
 				BF75280E1C27FB5600BB40B5 /* Fluido.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +329,7 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CINDER_PATH = ../../../cinder;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -335,6 +356,7 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CINDER_PATH = ../../../cinder;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

@@ -10,11 +10,15 @@
 #include "cinder/Capture.h"
 
 #include "Fluido.h"
+#include "UpdateBatch.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 using namespace ds;
+
+using FluidParticles = lonestar::UpdateBatch<lonestar::FluidParticle>;
+using FluidParticlesRef = lonestar::UpdateBatchRef<lonestar::FluidParticle>;
 
 class FluidoApp : public App {
   public:
@@ -61,6 +65,16 @@ class FluidoApp : public App {
     
     CaptureRef          mCapture;
     gl::TextureRef      mCaptureTex;
+    
+    gl::TextureRef      mDensityTex, mVelocityTex;
+    
+    FluidParticlesRef mFluidParticles;
+    
+    void preUpdate(  ci::gl::GlslProgRef & glsl );
+    void postUpdate(  ci::gl::GlslProgRef & glsl );
+    void preDraw(  ci::gl::GlslProgRef & glsl );
+    void postDraw(  ci::gl::GlslProgRef & glsl );
+
 };
 
 void FluidoApp::setup()
@@ -151,6 +165,37 @@ void FluidoApp::setup()
     
     init();
     
+    mFluidParticles = lonestar::UpdateBatch<lonestar::FluidParticle>::create( 50000,
+                                                                             std::bind( &FluidoApp::preUpdate, this, std::placeholders::_1 ),
+                                                                             std::bind( &FluidoApp::postUpdate, this, std::placeholders::_1 ),
+                                                                             std::bind( &FluidoApp::preDraw, this, std::placeholders::_1 ),
+                                                                             std::bind( &FluidoApp::postDraw, this, std::placeholders::_1 ));
+    mFluidParticles->populateBuffers();
+    mFluidParticles->populateGlsl();
+    
+    mVelocityTex = mFluido->getVelocityTexture();
+    mDensityTex = mFluido->getDensityTexture();
+    
+}
+
+void FluidoApp::preUpdate(  ci::gl::GlslProgRef & glsl )
+{
+    mVelocityTex->bind(0);
+    glsl->uniform( "uVelocities", 0 );
+    glsl->uniform("uDissapation", mFluido->getDissapation());
+    glsl->uniform("uDeltaTime", mFluido->getDeltaT());
+}
+void FluidoApp::postUpdate(  ci::gl::GlslProgRef & glsl )
+{
+    mVelocityTex->unbind(0);
+}
+void FluidoApp::preDraw(  ci::gl::GlslProgRef & glsl )
+{
+    
+}
+void FluidoApp::postDraw(  ci::gl::GlslProgRef & glsl )
+{
+    
 }
 
 void FluidoApp::init()
@@ -203,6 +248,8 @@ void FluidoApp::mouseUp( MouseEvent event )
 void FluidoApp::update()
 {
     
+     mFluidParticles->update();
+
 //    if (mCapture->checkNewFrame())
     {
         
@@ -311,6 +358,8 @@ void FluidoApp::draw()
         mFluido->drawObstacles(getWindowBounds());
         
     }
+    
+    mFluidParticles->draw();
     
     if (isCtrlDown) {
         gl::color(mColor);
